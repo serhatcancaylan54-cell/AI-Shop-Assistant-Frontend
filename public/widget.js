@@ -4,7 +4,7 @@
   const STORE_ID = currentScript.getAttribute("data-store");
 
   // Backend URL
-  const API_URL = "http://localhost:5000/api/ai";
+  const API_URL = "https://unsealable-myron-turbanlike.ngrok-free.dev/api/ai";
 
   // -----------------------------
   // BUBBLE BUTONU OLUŞTUR

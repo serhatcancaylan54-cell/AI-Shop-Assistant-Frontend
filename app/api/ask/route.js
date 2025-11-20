@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
@@ -9,14 +7,22 @@ export async function POST(req) {
 
     const OLLAMA_API = "https://ollama-api.openai-samples.com/generate";
 
-    const response = await axios.post(OLLAMA_API, {
-      model: "qwen2.5",
-      prompt,
-      stream: false
+    const response = await fetch(OLLAMA_API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "qwen2.5",
+        prompt,
+        stream: false
+      })
     });
 
+    const data = await response.json();
+
     return new Response(
-      JSON.stringify({ reply: response.data.response }),
+      JSON.stringify({ reply: data.response }),
       { status: 200 }
     );
   } catch (err) {

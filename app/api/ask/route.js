@@ -5,9 +5,7 @@ export async function POST(req) {
   try {
     const { prompt } = await req.json();
 
-    const OLLAMA_API = "https://ollama-api.openai-samples.com/generate";
-
-    const response = await fetch(OLLAMA_API, {
+    const response = await fetch("https://ollama-api.openai-samples.com/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -21,14 +19,13 @@ export async function POST(req) {
 
     const data = await response.json();
 
-    return new Response(
-      JSON.stringify({ reply: data.response }),
-      { status: 200 }
-    );
+    return new Response(JSON.stringify({ reply: data.response }), {
+      status: 200
+    });
+
   } catch (err) {
-    return new Response(
-      JSON.stringify({ error: "AI error", details: err.message }),
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: 500
+    });
   }
 }
